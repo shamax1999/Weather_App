@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Weather App</title>
+</head>
+<body class="light-theme">
+    <div class="container">
+        <header class="header">
+            <h1>Weather Application</h1>
+            <div id="theme-toggle">
+                <button onclick="toggleTheme()" class="btn btn-secondary" id="theme-btn">
+                    <i class="fas fa-sun" id="light-icon"></i>
+                    <i class="fas fa-moon" id="dark-icon" style="display: none;"></i>
+                </button>
+            </div>
+            
+        </header>
+
+        <div id="search-section" class="input-group mb-3">
+            <input type="text" id="search-input" class="form-control" placeholder="Enter a city, region, or country" oninput="suggestLocations()">
+            <button class="btn btn-primary" onclick="getWeather()">Search</button>
+        </div>
+        <ul id="suggestions" class="list-group"></ul>
+        <br>
+
+        <button class="btn btn-secondary mb-3" onclick="getCurrentLocationWeather()">Get Current Location Weather</button>
+
+        <div id="weather-container" class="weather-container">
+            <div id="current-weather" class="weather-section">
+                <h2>Current Weather</h2>
+                <div id="current-weather-details"></div>
+            </div>
+        
+            <div id="forecast-weather" class="weather-section">
+                <h2>Forecast Weather</h2>
+                <div id="forecast-details"></div>
+            </div>
+        
+            <div id="past-weather" class="weather-section">
+                <h2>Weekly Weather</h2>
+                <div id="past-weather-details"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
