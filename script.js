@@ -5,20 +5,20 @@ function toggleTheme() {
     document.body.classList.toggle("dark-theme");
     document.body.classList.toggle("light-theme");
 
-    // Get icons
+    
     const lightIcon = document.getElementById("light-icon");
     const darkIcon = document.getElementById("dark-icon");
 
-    // Toggle icon visibility
+    
     if (document.body.classList.contains("dark-theme")) {
         lightIcon.style.display = "none";
-        darkIcon.style.display = "inline"; // Show dark icon
+        darkIcon.style.display = "inline"; 
     } else {
-        lightIcon.style.display = "inline"; // Show light icon
+        lightIcon.style.display = "inline"; 
         darkIcon.style.display = "none";
     }
 
-    // Save the current theme to localStorage
+    
     const currentTheme = document.body.classList.contains("dark-theme") ? 'dark-theme' : 'light-theme';
     localStorage.setItem('theme', currentTheme);
 }
@@ -69,10 +69,18 @@ async function getWeather() {
         return;
     }
 
-    await fetchCurrentWeather(location);
-    await fetchForecastWeather(location);
-    await fetchPastWeather(location);
+    try {
+        await Promise.all([
+            fetchCurrentWeather(location),
+            fetchForecastWeather(location),
+            fetchPastWeather(location)
+        ]);
+        
+    } catch (error) {
+        console.error("Error fetching weather data:", error);
+    }
 }
+
 
 
 // Function to get current location weather using geolocation
@@ -85,7 +93,7 @@ async function getCurrentLocationWeather() {
     navigator.geolocation.getCurrentPosition(
         async (position) => {
             const { latitude, longitude } = position.coords;
-            console.log(`Current position: Latitude: ${latitude}, Longitude: ${longitude}`); // Log the coordinates
+            console.log(`Current position: Latitude: ${latitude}, Longitude: ${longitude}`); 
             const location = `${latitude},${longitude}`;
 
             await fetchCurrentWeather(location);
@@ -101,7 +109,6 @@ async function getCurrentLocationWeather() {
 
 
 // Fetch current weather data
-// Fetch current weather data
 async function fetchCurrentWeather(location) {
     try {
         const response = await fetch(`${baseUrl}/current.json?key=${apiKey}&q=${location}`);
@@ -109,8 +116,14 @@ async function fetchCurrentWeather(location) {
             throw new Error("Failed to fetch current weather data.");
         }
         const data = await response.json();
-        console.log("Current Weather Data:", data); // Log the current weather data
+        console.log("Current Weather Data:", data); 
         displayCurrentWeather(data);
+        
+        
+        const latitude = data.location.lat; 
+        const longitude = data.location.lon; 
+        displayMap(latitude, longitude); 
+
     } catch (error) {
         console.error("Error fetching current weather:", error);
         alert("Error fetching current weather. Please check the console for details.");
@@ -119,9 +132,10 @@ async function fetchCurrentWeather(location) {
 
 
 
+
 // Display current weather information along with the current date and time
 function displayCurrentWeather(data) {
-    // Get current date and time
+    
     const now = new Date();
     const currentDate = now.toLocaleDateString(undefined, {
         weekday: 'long',
@@ -139,8 +153,8 @@ function displayCurrentWeather(data) {
         <div class="location">
             <img src="${data.current.condition.icon}" alt="${data.current.condition.text}" class="weather-icon">
             <p class="weather-title">${data.location.name}, ${data.location.country}</p>
-            <p class="weather-date">${currentDate}</p> <!-- Add current date here -->
-            <p class="weather-time-large">${currentTime}</p> <!-- Add current time here with new class -->
+            <p class="weather-time-large">${currentTime}</p> 
+            <p class="weather-date">${currentDate}</p> 
         </div>
         
         <div class="weather-cards">
@@ -186,11 +200,11 @@ async function fetchForecastWeather(location) {
 
 // Display forecast weather information for the next 3 days
 function displayForecastWeather(data) {
-    let forecastHTML = "<div class='weather-cards'>"; // Wrap in a container
+    let forecastHTML = "<div class='weather-cards'>"; 
     data.forecast.forecastday.forEach(day => {
         forecastHTML += createWeatherCard(day);
     });
-    forecastHTML += "</div>"; // Close the container
+    forecastHTML += "</div>"; 
     document.getElementById("forecast-details").innerHTML = forecastHTML;
 }
 
@@ -213,7 +227,7 @@ function createWeatherCard(day) {
     } else if (dayDate.toDateString() === tomorrow.toDateString()) {
         displayDate = "Tomorrow";
     } else {
-        // Format the date to show the day name
+        
         const options = { weekday: 'long' };
         displayDate = dayDate.toLocaleDateString(undefined, options);
     }
@@ -236,9 +250,9 @@ function createWeatherCard(day) {
 
 
 
-// Display weekly weather information for the next 7 days
+// Display weekly weather information 
 function displayWeeklyWeather(data) {
-    let weeklyWeatherHTML = "<div class='weather-cards'>"; // Wrap in a container
+    let weeklyWeatherHTML = "<div class='weather-cards'>"; 
     const today = new Date();
 
     data.forecast.forecastday.forEach(day => {
@@ -251,14 +265,14 @@ function displayWeeklyWeather(data) {
             displayDate = "Tomorrow";
         } else {
             const options = { weekday: 'long' };
-            displayDate = dayDate.toLocaleDateString(undefined, options); // Format the date to show the day name
+            displayDate = dayDate.toLocaleDateString(undefined, options); 
         }
 
-        weeklyWeatherHTML += createWeatherCard(day, displayDate); // Pass displayDate to createWeatherCard
+        weeklyWeatherHTML += createWeatherCard(day, displayDate);
     });
 
-    weeklyWeatherHTML += "</div>"; // Close the container
-    document.getElementById("weekly-weather-details").innerHTML = weeklyWeatherHTML; // Insert the HTML into the page
+    weeklyWeatherHTML += "</div>"; 
+    document.getElementById("weekly-weather-details").innerHTML = weeklyWeatherHTML; 
 }
 
 
@@ -266,7 +280,7 @@ function displayWeeklyWeather(data) {
 // Fetch past weather data for the last 7 days
 async function fetchPastWeather(location) {
     const today = new Date();
-    let pastWeatherHTML = "<div class='weather-cards'>"; // Wrap in a container
+    let pastWeatherHTML = "<div class='weather-cards'>"; 
 
     for (let i = 1; i <= 7; i++) {
         const pastDate = new Date();
@@ -287,8 +301,8 @@ async function fetchPastWeather(location) {
         }
     }
     
-    pastWeatherHTML += "</div>"; // Close the container
-    document.getElementById("past-weather-details").innerHTML = pastWeatherHTML; // Insert the HTML into the page
+    pastWeatherHTML += "</div>"; 
+    document.getElementById("past-weather-details").innerHTML = pastWeatherHTML; 
 }
 
 
@@ -319,3 +333,22 @@ function setInitialTheme() {
 
 // Call the initial theme setting function
 setInitialTheme();
+
+//Map
+function displayMap(latitude, longitude) {
+    
+    const map = L.map('map').setView([latitude, longitude], 10); 
+
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    
+    L.marker([latitude, longitude]).addTo(map)
+        .bindPopup("Weather Location")
+        .openPopup();
+}
+
+

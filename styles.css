@@ -21,7 +21,6 @@ body {
     border-radius: 8px;
 }
 
-/* Default Styles */
 button {
     margin-left: 5px;
 }
@@ -66,25 +65,25 @@ body.dark-theme .weather-section {
 .weather-row {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Space between rows */
+    margin-bottom: 10px; 
 }
 
 .weather-row p {
-    margin-left: 10px; /* Space between icon and text */
-    font-size: 18px; /* Adjust font size for better readability */
+    margin-left: 10px; 
+    font-size: 18px; 
 }
 
-/* Optional: Adjust weather icon size */
+
 .weather-icon {
-    width: 30px; /* Adjust icon size */
-    height: 30px; /* Adjust icon size */
+    width: 30px; 
+    height: 30px; 
 }
 
 /* Icon Styles */
 .icon {
-    font-size: 28px; /* Larger icon size */
-    margin-right: 10px; /* Space between icon and text */
-    color: inherit; /* Use the same color as the theme text */
+    font-size: 28px; 
+    margin-right: 10px; 
+    color: inherit; 
 }
 
 /* Light Theme Icon Colors */
@@ -98,71 +97,71 @@ body.dark-theme .icon {
 }
 
 .location {
-    text-align: center; /* Center the title */
-    margin-bottom: 16px; /* Space below the location title */
+    text-align: center; 
+    margin-bottom: 16px; 
 }
 
 /* 3D Style Weather Cards */
 .weather-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Default: 4 cards per row */
-    gap: 16px; /* Space between cards */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 16px; 
 }
 
 .weather-card {
-    background: #ffffff; /* Light background */
-    color: #000000; /* Dark text color */
-    border-radius: 12px; /* Rounded corners for a smoother look */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for 3D effect */
+    background: #ffffff; 
+    color: #000000; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
     padding: 16px;
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add transition for shadow */
-    height: auto; /* Allow height to adjust based on content */
-    display: flex; /* Use flexbox inside the card */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Center items vertically */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    height: auto; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
     font-size: large;
 }
 
 .weather-card:hover {
-    transform: translateY(-8px) scale(1.05); /* Lift and scale effect on hover */
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover for 3D effect */
+    transform: translateY(-8px) scale(1.05); 
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); 
 }
 
 .weather-icon {
     width: 64px;
     height: 64px;
-    margin-bottom: 8px; /* Space between image and info */
+    margin-bottom: 8px; 
 }
 
 .weather-info {
     font-size: 1em;
-    margin-top: 8px; /* Space between info items */
+    margin-top: 8px; 
 }
 
 /* Media Queries for Responsive Design */
 @media (max-width: 1024px) {
     .weather-cards {
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row for tablet screens */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media (max-width: 768px) {
     .weather-cards {
-        grid-template-columns: 1fr; /* 1 card per row for mobile screens */
+        grid-template-columns: 1fr; 
     }
 }
 
 /* Light Theme Styles for Weather Cards */
 body.light-theme .weather-card {
-    background: #ffffff; /* Light background */
-    color: #000000; /* Dark text color */
+    background: #ffffff; 
+    color: #000000; 
 }
 
 /* Dark Theme Styles for Weather Cards */
 body.dark-theme .weather-card {
-    background: #333333; /* Dark background */
-    color: #ffffff; /* Light text color */
+    background: #333333; 
+    color: #ffffff; 
 }
 
 /* Style for the toggle button */
@@ -174,22 +173,21 @@ body.dark-theme .weather-card {
 }
 
 
-/* Default styles for light theme */
 .weather-time-large {
-    font-size: 3rem; /* Adjust size as needed */
+    font-size: 3rem; 
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 
                  0 2px 5px rgba(0, 0, 0, 0.4),
-                 0 3px 7px rgba(0, 0, 0, 0.3); /* Creates depth */
-    color: #333; /* Change color for light theme */
-    background: linear-gradient(to right, #ffffff, #ffffff); /* Gradient background */
-    padding: 10px; /* Padding for a better look */
-    border-radius: 8px; /* Rounded corners */
-    display: inline-block; /* Ensures the background wraps tightly */
+                 0 3px 7px rgba(0, 0, 0, 0.3); 
+    color: #333; 
+    background: linear-gradient(to right, #ffffff, #ffffff); 
+    padding: 10px; 
+    border-radius: 8px; 
+    display: inline-block; 
 }
 
-/* Styles for dark theme */
+
 .dark-theme .weather-time-large {
-    color: #fff; /* Change color for dark theme */
-    background: linear-gradient(to right, #1a1a1a, #2a2a2a); /* Darker gradient background */
+    color: #fff; 
+    background: linear-gradient(to right, #1a1a1a, #2a2a2a); 
 }
 
