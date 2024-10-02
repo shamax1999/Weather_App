@@ -7,13 +7,41 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 25px;
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 20px;
+    display: flex;                
+    justify-content: center;      
+    align-items: flex-start;      
+    flex-direction: row;          
+    margin-bottom: 20px;          
+    position: relative;           
 }
+
+#logo {
+    height: 160px;                
+    width: auto;                  
+    margin: 20px;                
+}
+
+@media (max-width: 768px) {
+    #logo {
+        height: 120px;          
+    }
+}
+
+@media (max-width: 480px) {
+    #logo {
+        height: 80px;            
+    }
+}
+
+
+
+
+
+
 
 .weather-section {
     margin-bottom: 30px;

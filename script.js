@@ -113,13 +113,12 @@ async function fetchCurrentWeather(location) {
     try {
         const response = await fetch(`${baseUrl}/current.json?key=${apiKey}&q=${location}`);
         if (!response.ok) {
-            throw new Error("Failed to fetch current weather data.");
+            throw new Error(`Failed to fetch current weather data. Status Code: ${response.status}`);
         }
         const data = await response.json();
         console.log("Current Weather Data:", data); 
         displayCurrentWeather(data);
-        
-        
+
         const latitude = data.location.lat; 
         const longitude = data.location.lon; 
         displayMap(latitude, longitude); 
@@ -133,21 +132,10 @@ async function fetchCurrentWeather(location) {
 
 
 
-// Display current weather information along with the current date and time
+
 function displayCurrentWeather(data) {
-    
-    const now = new Date();
-    const currentDate = now.toLocaleDateString(undefined, {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-    const currentTime = now.toLocaleTimeString(undefined, {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-    });
+    const localTime = data.location.localtime; // Get the local time of the location
+    const [currentDate, currentTime] = localTime.split(" "); // Split date and time
 
     const currentWeather = `
         <div class="location">
@@ -178,6 +166,7 @@ function displayCurrentWeather(data) {
     `;
     document.getElementById("current-weather-details").innerHTML = currentWeather;
 }
+
 
 
 
