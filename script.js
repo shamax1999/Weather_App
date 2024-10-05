@@ -26,7 +26,7 @@ function toggleTheme() {
 
 
 
-// Function to suggest locations based on user input
+// Suggest locations 
 async function suggestLocations() {
     const location = document.getElementById("search-input").value.trim();
     if (location.length < 3) return;
@@ -43,7 +43,7 @@ async function suggestLocations() {
     }
 }
 
-// Function to display location suggestions
+// Display location suggestions
 function displaySuggestions(suggestions) {
     const suggestionsList = document.getElementById("suggestions");
     suggestionsList.innerHTML = "";
@@ -61,7 +61,7 @@ function displaySuggestions(suggestions) {
     });
 }
 
-// Main function to get weather details
+// Get weather details
 async function getWeather() {
     const location = document.getElementById("search-input").value.trim();
     if (!location) {
@@ -83,7 +83,7 @@ async function getWeather() {
 
 
 
-// Function to get current location weather using geolocation
+
 async function getCurrentLocationWeather() {
     if (!navigator.geolocation) {
         alert("Geolocation is not supported by your browser.");
@@ -101,14 +101,14 @@ async function getCurrentLocationWeather() {
             await fetchPastWeather(location);
         },
         (error) => {
-            console.error("Error getting location:", error); // Log the error
+            console.error("Error getting location:", error); 
             alert("Unable to retrieve your location. Please check your settings.");
         }
     );
 }
 
 
-// Fetch current weather data
+
 async function fetchCurrentWeather(location) {
     try {
         const response = await fetch(`${baseUrl}/current.json?key=${apiKey}&q=${location}`);
@@ -134,8 +134,8 @@ async function fetchCurrentWeather(location) {
 
 
 function displayCurrentWeather(data) {
-    const localTime = data.location.localtime; // Get the local time of the location
-    const [currentDate, currentTime] = localTime.split(" "); // Split date and time
+    const localTime = data.location.localtime; 
+    const [currentDate, currentTime] = localTime.split(" "); 
 
     const currentWeather = `
         <div class="location">
@@ -171,7 +171,7 @@ function displayCurrentWeather(data) {
 
 
 
-// Fetch forecast weather data for the next 3 days
+
 async function fetchForecastWeather(location) {
     try {
         const response = await fetch(`${baseUrl}/forecast.json?key=${apiKey}&q=${location}&days=4`);
@@ -187,7 +187,7 @@ async function fetchForecastWeather(location) {
 }
 
 
-// Display forecast weather information for the next 3 days
+
 function displayForecastWeather(data) {
     let forecastHTML = "<div class='weather-cards'>"; 
     data.forecast.forecastday.forEach(day => {
@@ -198,7 +198,6 @@ function displayForecastWeather(data) {
 }
 
 
-// Function to create a weather card for a specific day with icons for each detail
 function createWeatherCard(day) {
     const dayDate = new Date(day.date);
     const today = new Date();
@@ -239,7 +238,7 @@ function createWeatherCard(day) {
 
 
 
-// Display weekly weather information 
+// Display weekly weather  
 function displayWeeklyWeather(data) {
     let weeklyWeatherHTML = "<div class='weather-cards'>"; 
     const today = new Date();
@@ -266,7 +265,7 @@ function displayWeeklyWeather(data) {
 
 
 
-// Fetch past weather data for the last 7 days
+
 async function fetchPastWeather(location) {
     const today = new Date();
     let pastWeatherHTML = "<div class='weather-cards'>"; 
@@ -297,7 +296,7 @@ async function fetchPastWeather(location) {
 
 
 
-// Function to create a weather card for a specific past day with icons for each detail
+
 function createPastWeatherCard(day) {
     return `
         <div class="weather-card">
@@ -314,13 +313,13 @@ function createPastWeatherCard(day) {
     `;
 }
 
-// Call this function to set the initial theme based on user preference or default
+
 function setInitialTheme() {
-    const theme = localStorage.getItem('theme') || 'light-theme'; // Default to light
+    const theme = localStorage.getItem('theme') || 'light-theme'; 
     document.body.classList.add(theme);
 }
 
-// Call the initial theme setting function
+
 setInitialTheme();
 
 //Map
